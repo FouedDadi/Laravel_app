@@ -21,3 +21,5 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/apnee', [App\Http\Controllers\API\AthleteController::class, 'Apnee'])->name('apnee');
+Route::get('/add_apnee', [App\Http\Controllers\API\AthleteController::class, 'create'])->name('apnee.create');
+Route::post('/add_apnee', [App\Http\Controllers\API\AthleteController::class, 'store'])->name('apnee.store');

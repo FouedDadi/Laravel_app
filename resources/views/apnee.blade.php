@@ -109,6 +109,7 @@ thead {
     <div class="mask d-flex align-items-center h-100"> -->
       <!-- <div class=""> -->
         <div class="row justify-content-center">
+        <a href="{{ route('apnee.create') }}" class="btn btn-success">Create Apnee</a>
           <div class="col-12">
             <div class="card">
               <div class="card-body p-0" style="height: 90vh">
