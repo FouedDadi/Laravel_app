@@ -72,15 +72,6 @@ thead {
                             <li class="w-100">
                                 <a href="{{ url('/apnee') }}" class="nav-link px-0" style="color: black"> <span class="d-none d-md-inline" style="color: black">Apnee</span></a>
                             </li>
-                            <li>
-                                <a href="#" class="nav-link px-0" style="color: black"> <span class="d-none d-sm-inline" style="color: black">Product</span> 2</a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0" style="color: black"> <span class="d-none d-sm-inline" style="color: black">Product</span> 3</a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0" style="color: black"> <span class="d-none d-sm-inline" style="color: black">Product</span> 4</a>
-                            </li>
                         </ul>
                     </li>
                     
