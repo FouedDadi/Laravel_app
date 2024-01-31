@@ -94,7 +94,7 @@ thead {
         <div class="col py-3 container">
         <section class="intro">
     <div class="container">
-        <h2>Create Apnee</h2>
+        <h2>Create Equipe</h2>
 
         @if(session('success'))
             <div class="alert alert-success">
