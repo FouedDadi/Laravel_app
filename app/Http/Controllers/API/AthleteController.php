@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 use App\Models\TbApnee;
+use App\Models\TbEquipe;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,12 +22,49 @@ class AthleteController extends Controller
      * Store a newly created resource in storage.
      */
 
+
+     public function Equipe()
+    {
+        $equipe = TbEquipe::all();
+        return view('equipe', ['equipe' => $equipe]);
+    }
+     public function createEquipe()
+     {
+        return view('add_equipe');
+     }
+
      public function create()
      {
         return view('add_apnee');
      }
 
+     public function editEquipe($nr_equipe)
+     {
+         $equipe = TbEquipe::findOrFail($nr_equipe);
+         return view('edit_equipe', compact('equipe'));
+     }
+ 
+     public function updateEquipe(Request $request, $nr_equipe)
+     {
+         $request->validate([
+             'equipe' => 'required|string|max:255',
+         ]);
+ 
+         $equipe = TbEquipe::findOrFail($nr_equipe);
+         $equipe->update([
+             'equipe' => $request->input('equipe'),
+         ]);
+ 
+         return redirect()->route('equipe')->with('success', 'Equipe updated successfully.');
+     }
 
+     public function destroyEquipe($nr_equipe)
+     {
+         $equipe = TbEquipe::findOrFail($nr_equipe);
+         $equipe->delete();
+ 
+         return response()->json(['success' => true]);
+     }
     public function store(Request $request)
     {
         $request->validate([
@@ -80,6 +118,17 @@ class AthleteController extends Controller
         TbApnee::create($request->all());
 
         return redirect()->route('apnee')->with('success', 'Apnee created successfully!');
+    }
+
+    public function storeEquipe(Request $request)
+    {
+        $request->validate([
+            'equipe' => 'required',
+        ]);
+
+        TbEquipe::create($request->all());
+
+        return redirect()->route('equipe')->with('success', 'Equipe created successfully!');
     }
 
     /**

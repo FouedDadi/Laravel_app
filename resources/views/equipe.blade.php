@@ -4,15 +4,15 @@
 <style>html,
 body,
 .intro {
-  height: 100%;
+  height: 90%;
 }
 
-table td,
+/* table td,
 table th {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-}
+} */
 
 thead th {
   color: #fff;
@@ -55,7 +55,7 @@ thead {
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-secondary">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                 <a href="/home" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-black text-decoration-none">
-                    <span class="fs-5 d-none d-sm-inline" style="color: black">Menu</span>
+                    <span class="fs-5 d-none d-sm-inline">Menu</span>
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     
@@ -91,10 +91,83 @@ thead {
                 </div> -->
             </div>
         </div>
-        <div class="col py-3">
-        
+        <div class="col py-3 container">
+        <section class="intro">
+  <!-- <div class="bg-image h-100" style="background-color: #f5f7fa;">
+    <div class="mask d-flex align-items-center h-100"> -->
+      <!-- <div class=""> -->
+        <div class="row justify-content-center">
+        <a href="{{ route('equipe.create') }}" class="btn btn-success mt-5 mb-5" style="width: 20%">Create Equipe</a>
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body p-0" style="height: 90vh">
+                <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: absolute; height: 100%">
+                  <table class="table table-striped mb-0">
+                    <thead style="background-color: #002d72;">
+                      <tr>
+                        <th scope="col">nr_ap</th>
+                        <th scope="col">equipe</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($equipe as $equipe)
+                      <tr>
+                        <td>{{ $equipe->nr_equipe }}</td>
+                        <td>{{ $equipe->equipe }}</td>
+                        <td>
+                          <a href="{{ route('equipe.edit', $equipe->nr_equipe) }}" class="btn btn-primary">Edit</a>
+                          <button class="btn btn-danger" onclick="deleteEquipe({{ $equipe->nr_equipe }})">Delete</button>
+                        </td>
+                      </tr>
+                      @endforeach
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- </div> -->
+    <!-- </div>
+  </div> -->
+</section>
         </div>
     </div>
 </div>
-
 @endsection
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function deleteEquipe(nrEquipe) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You won\'t be able to revert this!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Perform the delete operation via AJAX or form submission
+                    // For simplicity, let's assume you have a delete route in EquipeController
+                    // and use AJAX to send the request
+                    axios.delete('/equipe/' + nrEquipe)
+                        .then((response) => {
+                            if (response.data.success) {
+                                Swal.fire('Deleted!', 'Equipe has been deleted.', 'success');
+                                window.location.reload();
+                                // You may want to reload the page or update the table without refreshing
+                            } else {
+                                Swal.fire('Error!', 'Failed to delete equipe.', 'error');
+                            }
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                            Swal.fire('Error!', 'Failed to delete equipe.', 'error');
+                        });
+                }
+            });
+        }
+    </script>

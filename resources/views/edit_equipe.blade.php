@@ -4,15 +4,15 @@
 <style>html,
 body,
 .intro {
-  height: 100%;
+  height: 90%;
 }
 
-table td,
+/* table td,
 table th {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-}
+} */
 
 thead th {
   color: #fff;
@@ -55,7 +55,7 @@ thead {
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-secondary">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                 <a href="/home" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-black text-decoration-none">
-                    <span class="fs-5 d-none d-sm-inline" style="color: black">Menu</span>
+                    <span class="fs-5 d-none d-sm-inline">Menu</span>
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     
@@ -91,8 +91,35 @@ thead {
                 </div> -->
             </div>
         </div>
-        <div class="col py-3">
-        
+        <div class="col py-3 container">
+        <section class="intro">
+    <div class="container">
+    <h2>Edit Equipe</h2>
+
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <form method="POST" action="{{ route('equipe.update', $equipe->nr_equipe) }}">
+            @csrf
+            @method('PUT')
+
+            <div class="form-group">
+                <label for="equipe">Equipe Name:</label>
+                <input type="text" class="form-control" id="equipe" name="equipe" value="{{ old('equipe', $equipe->equipe) }}">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Equipe</button>
+            <a href="{{ url()->previous() }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+
+      <!-- </div> -->
+    <!-- </div>
+  </div> -->
+</section>
         </div>
     </div>
 </div>
